@@ -1,0 +1,17 @@
+select 
+case when country='India' then 'in'
+when country='United States' then 'us'
+when country='United Kingdom' then 'gb'
+when country='Brasil' then 'br'
+when country='South Africa' then 'za'
+when country='Australia' then 'au'
+when country='Italia' then 'it'
+when country='France' then 'fr'
+when country='Nigeria' then 'ne'
+when country='Canada' then 'ca'
+when country='Russia' then 'ru'
+when country='China' then 'cn'
+when country='Greenland ' then 'gl'
+else country end as Country,case  when country='Russia' then 0
+when country='China' then 0
+when country='Greenland ' then 0 else count(*) end as cnt from(select coalesce(place.country,"") country from table) where  nullif(country,"") is not null group by country order by cnt desc
